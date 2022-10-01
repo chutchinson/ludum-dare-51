@@ -1,6 +1,7 @@
 extends KinematicBody
 
 onready var bomb = preload('res://scenes/entities/bomb.tscn')
+onready var boomerang = preload('res://scenes/entities/boomerang.tscn')
 
 enum PlayerState {
 	IDLE = 0,
@@ -69,15 +70,16 @@ func damage(sender: Spatial, value: float):
 	
 func _can_use():
 	if $ActionCooldown.time_left > 0.0: return false
-	var entity = bomb.instance()
-	entity.transform.origin = $Holster.global_transform.origin
-	print(entity.transform.origin)
-	var parent = get_parent()
-	parent.add_child(entity)
+	return true
 	
 func _use():
 	if not _can_use(): return
-	print('use')
+	var entity_type = boomerang
+	var entity = entity_type.instance()
+	entity.source = self
+	entity.transform.origin = $Holster.global_transform.origin
+	var parent = get_parent()
+	parent.add_child(entity)
 
 func _do_attack():
 	if $AttackCooldown.time_left > 0.0: return
