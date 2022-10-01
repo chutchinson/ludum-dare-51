@@ -1,5 +1,7 @@
 extends Spatial
 
+onready var enemy = preload('res://scenes/entities/enemy.tscn')
+
 export(Resource) var shape
 export var min_distance_from_player := 5.0
 export(int, LAYERS_3D_PHYSICS) var collision_mask
@@ -54,14 +56,11 @@ func _spawn():
 	pass
 
 func _spawn_at(pos: Vector3) -> Spatial:
-	var mesh = MeshInstance.new()
-	var sphere = SphereMesh.new()
-	sphere.radius = 0.5
-	mesh.mesh = sphere
-	mesh.transform.origin = pos
+	var entity = enemy.instance()
+	entity.transform.origin = pos
 	var parent = get_parent()
-	parent.call_deferred('add_child', mesh)
-	return mesh
+	parent.call_deferred('add_child', entity)
+	return entity
 	
 func _random_point() -> Vector3:
 	var radius = 5.0

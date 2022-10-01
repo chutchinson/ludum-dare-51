@@ -23,7 +23,7 @@ func _ready():
 func _process(delta):
 	_time = clamp(_time + delta, 0.0, 10.0)
 	
-	if Input.is_action_just_pressed('game_attack'):
+	if Input.is_action_just_pressed('ui_accept'):
 		emit_signal('spawn')
 	
 	return

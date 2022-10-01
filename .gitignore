@@ -1,2 +1,5 @@
 src/.import/
 src/assets/import/
+
+*.blend?
+*.blend
