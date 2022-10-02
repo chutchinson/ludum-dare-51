@@ -34,7 +34,7 @@ func _remove():
 func _physics_process(delta):
 		
 	_velocity = move_and_slide(_velocity, Vector3.UP, false, 4, 0.785398, false)
-	_velocity.y = -15.0
+	_velocity.y = -10.0
 	
 	if $RayCast.is_colliding():
 		

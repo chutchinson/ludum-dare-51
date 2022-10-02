@@ -6,13 +6,11 @@
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="Player" groups=["player"] instance=ExtResource( 3 )]
+has_shield = true
+has_bomb = true
+has_boomerang = true
+has_fire_bomb = true
 invincible = true
-
-[node name="Shield" parent="." index="3"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.00166364, 2.10626, 0.705397 )
-
-[node name="Sword" parent="." index="4"]
-transform = Transform( 0.326611, 0.267452, 0.906529, -0.633556, 0.773696, -7.35248e-09, -0.701378, -0.574337, 0.422144, 0.667219, 1.66324, -0.299042 )
 
 [node name="AnimationTree" parent="." index="7"]
 parameters/playback = SubResource( 1 )

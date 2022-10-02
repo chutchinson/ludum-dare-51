@@ -3,10 +3,11 @@ class_name Combatant
 
 onready var bomb = preload('res://scenes/entities/bomb.tscn')
 onready var boomerang = preload('res://scenes/entities/boomerang.tscn')
+onready var firebomb = preload('res://scenes/entities/firebomb.tscn')
 
 export var display_name = ''
 export var has_shield = false
-export var has_sword = false
+export var has_bomb = false
 export var has_boomerang = false
 export var has_fire_bomb = false
 export var speed = 8.0
@@ -34,12 +35,17 @@ var _stunned = false
 var _hit = false
 var _target : Spatial = null
 
-onready var _items = [bomb, boomerang]
+var _items = []
 var _selected_item = 0
 
 onready var anim = $AnimationTree.get('parameters/playback') as AnimationNodeStateMachinePlayback
 	
 func _ready():
+
+	if has_bomb: _items.append(bomb)
+	if has_boomerang: _items.append(boomerang)
+	if has_fire_bomb: _items.append(firebomb)
+
 	anim.start('move')
 	input = Vector2.ZERO
 	health = max_health
@@ -96,6 +102,7 @@ func _die():
 	queue_free()
 	
 func _can_use():
+	if len(_items) == 0: return false
 	if $ActionCooldown.time_left > 0.0: return false
 	return true
 	
@@ -113,6 +120,8 @@ func select_next_item(direction: int):
 	
 func use():
 	if not _can_use(): return
+	
+	$ActionCooldown.start(0.0)
 	
 	var entity_type = _items[_selected_item]
 	var entity = entity_type.instance()

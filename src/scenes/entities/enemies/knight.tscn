@@ -9,6 +9,8 @@ albedo_color = Color( 1, 0, 0, 1 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
 [node name="Knight" instance=ExtResource( 1 )]
+has_shield = true
+has_bomb = true
 speed = 2.0
 
 [node name="Brain" type="Node" parent="." index="0"]
@@ -20,9 +22,6 @@ one_shot = true
 
 [node name="MeshInstance" parent="." index="1"]
 material/0 = SubResource( 1 )
-
-[node name="Sword" parent="." index="5"]
-transform = Transform( 0.326611, 0.267452, 0.906529, -0.633556, 0.773696, -7.35248e-09, -0.701378, -0.574337, 0.422144, 0.667219, 1.66324, -0.299042 )
 
 [node name="Tween" parent="." index="6"]
 playback_process_mode = 1
