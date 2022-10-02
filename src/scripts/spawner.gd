@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var enemy = preload('res://scenes/entities/enemy.tscn')
+onready var enemy = preload('res://scenes/entities/enemies/knight.tscn')
 
 export(Resource) var shape
 export var min_distance_from_player := 5.0

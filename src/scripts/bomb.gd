@@ -1,25 +1,29 @@
 extends KinematicBody
 
+export var fuse_time = 10.0
+export var speed = 25.0
 export var damage := 10.0
 export var damping := 0.2
 
-onready var anim: AnimationPlayer = $AnimationPlayer
-onready var hitbox: Area = $HitArea
+var direction = Vector3.ZERO
+
+onready var _anim: AnimationPlayer = $AnimationPlayer
+onready var _hitbox: Area = $HitArea
 
 var _bounces = 0
-var _velocity = Vector3.FORWARD * 12.0
+var _velocity = Vector3.ZERO
+
+func _ready():
+	_velocity = direction * speed
+	$ExplodeTimer.wait_time = fuse_time
 
 func _on_explode():
-	anim.play('explode')
+	_anim.play('explode')
 	_damage_enemies_in_area()
 	pass
 	
-func _set_velocity(value: float):
-	_velocity.z = value
-	pass
-	
 func _damage_enemies_in_area():
-	var entities = hitbox.get_overlapping_bodies()
+	var entities = _hitbox.get_overlapping_bodies()
 	for entity in entities:
 		if entity.has_method('damage'):
 			entity.damage(self, damage)

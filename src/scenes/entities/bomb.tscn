@@ -12,7 +12,7 @@ albedo_color = Color( 0, 0.6, 1, 1 )
 radius = 0.5
 
 [sub_resource type="SphereShape" id=6]
-radius = 2.5
+radius = 4.0
 
 [sub_resource type="Animation" id=5]
 length = 0.001

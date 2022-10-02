@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/env/platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/camera.gd" type="Script" id=2]
 [ext_resource path="res://scenes/entities/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui/hud.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/spawner.gd" type="Script" id=5]
-[ext_resource path="res://scenes/entities/enemy.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=3]
 ambient_light_color = Color( 0.741176, 0.741176, 0.741176, 1 )
@@ -29,19 +28,18 @@ shadow_enabled = true
 transform = Transform( 10, 0, 0, 0, 5, 0, 0, 0, 10, 0, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9 )
-
-[node name="Enemy" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -3.78552e-08, -0.5, 0.866025, -2.18557e-08, 0.866025, 0.5, -1, 0, -4.37114e-08, 13.744, 8, 0 )
-script = ExtResource( 2 )
-
-[node name="Tween" type="Tween" parent="Camera"]
-playback_process_mode = 0
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, 0 )
 
 [node name="Hud" parent="." instance=ExtResource( 4 )]
 
 [node name="Spawner" type="Spatial" parent="."]
 script = ExtResource( 5 )
+
+[node name="CameraRoot" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="CameraRoot"]
+transform = Transform( 1, 2.18557e-08, 5.85625e-09, -2.18557e-08, 0.866025, 0.5, 5.85619e-09, -0.5, 0.866025, -0.256, 8, 15 )
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="CameraRoot/Camera"]
+playback_process_mode = 0

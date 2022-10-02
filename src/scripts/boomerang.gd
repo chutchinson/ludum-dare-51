@@ -4,20 +4,20 @@ export var damage = 2.0
 export var speed = 10.0
 export var degrees_per_second = -720.0
 
+var direction = Vector3.ZERO
 var source: Spatial = null
 
 enum BoomerangState {
 	MOVE,
 	RETURN
 }
-onready var _height = transform.origin.y
+onready var _height = global_transform.origin.y
 
 var _velocity = Vector3.ZERO
 var _state = BoomerangState.MOVE
 
 func _ready():
-	_velocity = -transform.basis.z * speed
-	pass
+	_velocity = direction * speed
 
 func _move(delta):
 	var collision = _apply_movement(_velocity, delta)
@@ -48,6 +48,8 @@ func _return(delta):
 	var collision = _apply_movement(velocity, delta)
 	
 	if collision != null:
+		if collision.collider.has_method('boomerang_return'):
+			collision.collider.boomerang_return(self)
 		queue_free()
 		
 	pass
